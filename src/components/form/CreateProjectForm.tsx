@@ -2,16 +2,23 @@ import { createSignal } from "solid-js";
 import { useModal } from "../providers/ModalProvider";
 import { ProjectStatus } from "../../types/projectTypes";
 import { createProject } from "../../api";
+import { useProjects } from "../providers/ProjectsProvider";
 
 export default function CreateProjectForm() {
   const [name, setName] = createSignal<string>("");
   const [status, setStatus] = createSignal<ProjectStatus>("todo");
   const [, actions] = useModal();
+  const [, projectActions] = useProjects();
 
   const handleCreate = async () => {
-    await createProject({ name: name(), status: status() });
-
-    actions.close();
+    try {
+      await createProject({ name: name(), status: status() });
+    } catch (e) {
+      console.log(e);
+    } finally {
+      actions.close();
+      projectActions.setShouldFetch(true);
+    }
   };
 
   return (
@@ -28,7 +35,6 @@ export default function CreateProjectForm() {
         />
       </div>
 
-      {/* Select with options */}
       <div class="select-group">
         <label for="taskStatus">Task Status</label>
         <select

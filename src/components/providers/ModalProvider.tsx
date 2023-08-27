@@ -28,7 +28,7 @@ type Props = {
   children: JSXElement;
 };
 
-export function ModalProvider(props: Props) {
+export default function ModalProvider(props: Props) {
   const [modalStore, setModalStore] = createSignal(initialModalState);
 
   return (

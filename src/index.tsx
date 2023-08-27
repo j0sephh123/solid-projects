@@ -2,15 +2,16 @@
 import { render } from "solid-js/web";
 import "./index.css";
 import App from "./App";
-import { ModalProvider } from "./components/providers/ModalProvider";
-
-const root = document.getElementById("root");
+import ModalProvider from "./components/providers/ModalProvider";
+import ProjectsProvider from "./components/providers/ProjectsProvider";
 
 render(
   () => (
-    <ModalProvider>
-      <App />
-    </ModalProvider>
+    <ProjectsProvider>
+      <ModalProvider>
+        <App />
+      </ModalProvider>
+    </ProjectsProvider>
   ),
-  root!
+  document.getElementById("root")!
 );

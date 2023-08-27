@@ -1,21 +1,32 @@
 import { DropdownMenu } from "@kobalte/core";
-import { For, Match, Switch, createResource } from "solid-js";
+import { For, Match, Switch, createEffect, createResource } from "solid-js";
 import { getProjects, removeProject } from "../api";
 import TableRow from "../components/TableRow/TableRow";
 import TableWrapper from "../components/TableWrapper/TableWrapper";
 import { Project } from "../types/projectTypes";
 import TrashIcon from "../icons/TrashIcon";
+import { useProjects } from "../components/providers/ProjectsProvider";
 
 export default function ProjectsPage() {
-  const [query] = createResource<Project[]>(getProjects);
+  const [ctx, actions] = useProjects();
+  const [query, { refetch }] = createResource<Project[]>(getProjects);
 
   const handleDelete = async (id: Project["id"]) => {
     try {
       await removeProject(id);
     } catch (e) {
       console.log(e);
+    } finally {
+      actions.setShouldFetch(true);
     }
   };
+
+  createEffect(() => {
+    if (ctx().shouldFetch) {
+      refetch();
+      actions.setShouldFetch(false);
+    } 
+  }, [ctx().shouldFetch]);
 
   return (
     <>
