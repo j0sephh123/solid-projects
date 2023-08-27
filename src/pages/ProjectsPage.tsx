@@ -1,16 +1,14 @@
-import { DropdownMenu } from "@kobalte/core";
 import { For, Match, Switch, createEffect, createResource } from "solid-js";
 import { getProjects, removeProject } from "../api";
-import TableRow from "../components/TableRow/TableRow";
-import TableWrapper from "../components/TableWrapper/TableWrapper";
+import TableRow from "../components/table/TableRow/TableRow";
+import TableWrapper from "../components/table/TableWrapper/TableWrapper";
 import { Project } from "../types/projectTypes";
-import TrashIcon from "../icons/TrashIcon";
 import { useProjects } from "../components/providers/ProjectsProvider";
+import TableRowActionsMenu from "../components/table/TableRow/TableRowActionsMenu";
 
 export default function ProjectsPage() {
   const [ctx, actions] = useProjects();
   const [query, { refetch }] = createResource<Project[]>(getProjects);
-
   const handleDelete = async (id: Project["id"]) => {
     try {
       await removeProject(id);
@@ -25,7 +23,7 @@ export default function ProjectsPage() {
     if (ctx().shouldFetch) {
       refetch();
       actions.setShouldFetch(false);
-    } 
+    }
   }, [ctx().shouldFetch]);
 
   return (
@@ -54,24 +52,9 @@ export default function ProjectsPage() {
                     },
                     {
                       value: (
-                        <DropdownMenu.Root>
-                          <DropdownMenu.Trigger class="dropdown-menu__trigger">
-                            <span>Actions</span>
-                          </DropdownMenu.Trigger>
-                          <DropdownMenu.Portal>
-                            <DropdownMenu.Content class="dropdown-menu__content">
-                              <DropdownMenu.Item
-                                onClick={() => handleDelete(id)}
-                                class="dropdown-menu__item"
-                              >
-                                Remove
-                                <div class="dropdown-menu__item-right-slot">
-                                  <TrashIcon />
-                                </div>
-                              </DropdownMenu.Item>
-                            </DropdownMenu.Content>
-                          </DropdownMenu.Portal>
-                        </DropdownMenu.Root>
+                        <TableRowActionsMenu
+                          onRequestDelete={() => handleDelete(id)}
+                        />
                       ),
                     },
                   ]}
