@@ -1,33 +1,16 @@
-import { createEffect, createResource, createSignal } from "solid-js";
+import { createSignal } from "solid-js";
 import { useModal } from "../providers/ModalProvider";
 import { ProjectStatus } from "../../types/projectTypes";
-import { createProject, getProjects } from "../../api";
+import { createProject } from "../../api";
 
 export default function CreateProjectForm() {
-  // , {
-  //   onSuccess() {
-  //     queryClient.invalidateQueries([queries.projects]);
-  //     setName("");
-  //     setStatus("todo");
-  //     actions.close();
-  //   },
-  // }
-
   const [name, setName] = createSignal<string>("");
   const [status, setStatus] = createSignal<ProjectStatus>("todo");
   const [, actions] = useModal();
 
-  // You can keep your `createResource` for `getProjects` if you're using it somewhere else
-  const [projects, { refetch }] = createResource(getProjects);
-
   const handleCreate = async () => {
-    // Call your API function here
     await createProject({ name: name(), status: status() });
 
-    // Refetch projects or invalidate cache or whatever you want to do next
-    refetch();
-
-    // Close the modal
     actions.close();
   };
 
