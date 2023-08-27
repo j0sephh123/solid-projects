@@ -1,4 +1,4 @@
-import { ProjectStatus } from "../types/projectTypes";
+import { Project, ProjectStatus } from "../types/projectTypes";
 
 const url = "http://localhost:1337/api/projects";
 
@@ -19,4 +19,7 @@ export const createProject = (newProject: {
     body: JSON.stringify({
       data: { name: newProject.name, status: newProject.status },
     }),
-  }).then((r) => r.json());
+  });
+
+export const removeProject = (id: Project["id"]) =>
+  fetch(`${url}/${id}`, { method: "DELETE" });
