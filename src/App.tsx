@@ -1,5 +1,6 @@
 import TheNavbar from "./components/TheNavbar";
 import DialogManager from "./components/dialog/DialogManager";
+import Notification from "./components/notification/Notification";
 import ProjectsPage from "./pages/ProjectsPage";
 
 export default function App() {
@@ -8,6 +9,7 @@ export default function App() {
       <TheNavbar />
       <ProjectsPage />
       <DialogManager />
+      <Notification />
     </>
   );
 }
