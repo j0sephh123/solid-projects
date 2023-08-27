@@ -1,0 +1,249 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+}
+/* Reset some default browser styles */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  background-color: #242424; /* Your background color */
+  color: #f1f1f1; /* Light text for contrast */
+}
+
+/* Add borders to the table and table cells */
+th,
+td {
+  border: 1px solid #444; /* Darker than background but lighter than text */
+  text-align: left;
+  padding: 12px;
+}
+
+/* Add a bit of a top and bottom margin for each row */
+tr {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+/* Style the table headers */
+th {
+  background-color: #333; /* Slightly darker background for headers */
+  color: #fff; /* White text for headers */
+}
+
+/* Alternate row background */
+tr:nth-child(even) {
+  background-color: #333;
+}
+.button {
+  appearance: none;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  height: 36px;
+  width: auto;
+  outline: none;
+  border-radius: 6px;
+  padding: 0 16px;
+  background-color: hsl(200 98% 39%);
+  color: white;
+  font-size: 16px;
+  line-height: 0;
+  transition: 250ms background-color;
+  border: none;
+  cursor: pointer;
+}
+.button:hover {
+  background-color: hsl(200, 36%, 25%);
+}
+.dialog__trigger:hover {
+  background-color: hsl(201 96% 32%);
+}
+.dialog__trigger:focus-visible {
+  outline: 2px solid hsl(200 98% 39%);
+  outline-offset: 2px;
+}
+.dialog__trigger:active {
+  background-color: hsl(201 90% 27%);
+}
+.dialog__overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background-color: rgb(0 0 0 / 0.8);
+  animation: overlayHide 250ms ease 100ms forwards;
+}
+.dialog__overlay[data-expanded] {
+  animation: overlayShow 250ms ease;
+}
+.dialog__positioner {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.dialog__content {
+  z-index: 50;
+  max-width: min(calc(100vw - 16px), 500px);
+  border: 1px solid hsl(240 5% 84%);
+  border-radius: 6px;
+  padding: 16px;
+  background-color: #242424;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  animation: contentHide 300ms ease-in forwards;
+}
+.dialog__content[data-expanded] {
+  animation: contentShow 300ms ease-out;
+}
+.dialog__header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.dialog__title {
+  font-size: 20px;
+  font-weight: 500;
+  color: #fff;
+}
+.dialog__description {
+  font-size: 16px;
+  color: hsl(240 5% 26%);
+}
+.dialog__closeButton {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+@keyframes overlayShow {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes overlayHide {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@keyframes contentShow {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes contentHide {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+}
+nav {
+  border-bottom: 1px solid #444;
+  margin-bottom: 16px;
+  padding: 8px;
+  background-color: #333;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.input {
+  background-color: #333333;
+  border: 1px solid #444444;
+  border-radius: 4px;
+  color: #ffffff;
+  font-size: 16px;
+  padding: 8px 12px;
+  margin: 8px 0;
+}
+.input:focus {
+  outline: none;
+  border-color: #007bff;
+}
+.select {
+  background-color: #333333;
+  border: 1px solid #444444;
+  border-radius: 4px;
+  color: #ffffff;
+  font-size: 16px;
+  padding: 8px 12px;
+  margin: 8px 0;
+}
+.select:focus {
+  outline: none;
+  border-color: #007bff;
+}
+option {
+  background-color: #333333;
+  color: #ffffff;
+}
+.input-group,
+.select-group {
+  margin-bottom: 16px;
+}
+
+/* Labels */
+.input-group label,
+.select-group label {
+  display: inline-block;
+  margin-bottom: 8px;
+  color: #FFFFFF;
+  font-weight: 600;
+}
+.modal-actions .button {
+  width: 100%;
+}
