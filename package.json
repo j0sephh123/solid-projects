@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@kobalte/core": "^0.11.0",
-    "@tanstack/solid-query": "^4.33.0",
     "solid-js": "^1.7.8"
   },
   "devDependencies": {

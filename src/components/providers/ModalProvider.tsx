@@ -1,7 +1,11 @@
-import { createSignal, createContext, useContext } from "solid-js";
+import { createSignal, createContext, useContext, JSXElement } from "solid-js";
 
 export type ModalState = {
   type: "create" | "delete" | null;
+};
+
+export const initialModalState: ModalState = {
+  type: null,
 };
 
 export type ModalContextType = [
@@ -12,10 +16,6 @@ export type ModalContextType = [
   }
 ];
 
-export const initialModalState: ModalState = {
-  type: null,
-};
-
 const ModalContext = createContext<ModalContextType>([
   () => initialModalState,
   {
@@ -24,7 +24,11 @@ const ModalContext = createContext<ModalContextType>([
   },
 ]);
 
-export function ModalProvider(props: any) {
+type Props = {
+  children: JSXElement;
+};
+
+export function ModalProvider(props: Props) {
   const [modalStore, setModalStore] = createSignal(initialModalState);
 
   return (
@@ -33,9 +37,7 @@ export function ModalProvider(props: any) {
         modalStore as () => ModalState,
         {
           open(type: ModalState["type"]) {
-            console.log("here");
-
-            setModalStore(() => ({ type }));
+            setModalStore((prev) => ({ ...prev, type }));
           },
           close() {
             setModalStore(initialModalState);

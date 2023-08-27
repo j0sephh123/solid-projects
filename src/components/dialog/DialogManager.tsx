@@ -1,5 +1,5 @@
-import { useModal } from "../providers/ModalProvider";
 import { Dialog } from "@kobalte/core";
+import { useModal } from "../providers/ModalProvider";
 import CloseIcon from "../../icons/CloseIcon";
 import CreateProjectForm from "../form/CreateProjectForm";
 
