@@ -1,48 +1,23 @@
-import { createSignal, createContext, useContext, JSXElement } from "solid-js";
-import { ProjectAttributes } from "../../types/projectTypes";
+import { createContext, useContext, ParentProps } from "solid-js";
+import {
+  useNotificationsStore,
+  NotificationsStoreType,
+} from "../../store/notificationStore";
 
-export type NotificationsState = {
-  message?: string;
-};
-
-export const initialNotificationsState: NotificationsState = {
-  message: undefined,
-};
-
-export type NotificationsStateContextType = [
-  () => NotificationsState,
-  {
-    setMessage: (arg: NotificationsState["message"]) => void;
-  }
-];
-
-const NotificationsContext = createContext<NotificationsStateContextType>([
-  () => initialNotificationsState,
-  {
+const NotificationsContext = createContext<NotificationsStoreType>({
+  getState: () => ({
+    message: undefined,
+  }),
+  actions: {
     setMessage: () => undefined,
   },
-]);
+});
 
-type Props = {
-  children: JSXElement;
-};
-
-export default function NotificationsProvider(props: Props) {
-  const [notificationsStore, setNotificationsStore] = createSignal(
-    initialNotificationsState
-  );
+export default function NotificationsProvider(props: ParentProps) {
+  const notificationsStore = useNotificationsStore();
 
   return (
-    <NotificationsContext.Provider
-      value={[
-        notificationsStore as () => NotificationsState,
-        {
-          setMessage(message) {
-            setNotificationsStore((prev) => ({ ...prev, message }));
-          },
-        },
-      ]}
-    >
+    <NotificationsContext.Provider value={notificationsStore}>
       {props.children}
     </NotificationsContext.Provider>
   );

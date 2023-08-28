@@ -1,50 +1,21 @@
-import { createSignal, createContext, useContext, JSXElement } from "solid-js";
+import { createContext, useContext, ParentProps } from "solid-js";
+import { useModalStore, type ModalStoreType } from "../../store/modalStore";
 
-export type ModalState = {
-  type: "create" | "delete" | null;
-};
-
-export const initialModalState: ModalState = {
-  type: null,
-};
-
-export type ModalContextType = [
-  () => ModalState,
-  {
-    open: (type: ModalState["type"]) => void;
-    close: VoidFunction;
-  }
-];
-
-const ModalContext = createContext<ModalContextType>([
-  () => initialModalState,
-  {
+const ModalContext = createContext<ModalStoreType>({
+  getState: () => ({
+    type: null,
+  }),
+  actions: {
     open: () => undefined,
     close: () => undefined,
   },
-]);
+});
 
-type Props = {
-  children: JSXElement;
-};
-
-export default function ModalProvider(props: Props) {
-  const [modalStore, setModalStore] = createSignal(initialModalState);
+export default function ModalProvider(props: ParentProps) {
+  const modalStore = useModalStore();
 
   return (
-    <ModalContext.Provider
-      value={[
-        modalStore as () => ModalState,
-        {
-          open(type: ModalState["type"]) {
-            setModalStore((prev) => ({ ...prev, type }));
-          },
-          close() {
-            setModalStore(initialModalState);
-          },
-        },
-      ]}
-    >
+    <ModalContext.Provider value={modalStore}>
       {props.children}
     </ModalContext.Provider>
   );

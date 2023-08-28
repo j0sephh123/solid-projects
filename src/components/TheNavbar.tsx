@@ -1,7 +1,7 @@
 import { useModal } from "./providers/ModalProvider";
 
 export default function TheNavbar() {
-  const [, actions] = useModal();
+  const { actions } = useModal();
 
   return (
     <nav>

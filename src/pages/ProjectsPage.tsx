@@ -7,7 +7,7 @@ import { useProjects } from "../components/providers/ProjectsProvider";
 import TableRowActionsMenu from "../components/table/TableRow/TableRowActionsMenu";
 
 export default function ProjectsPage() {
-  const [ctx, actions] = useProjects();
+  const { actions, getState } = useProjects();
   const [query, { refetch }] = createResource<Project[]>(getProjects);
   const handleDelete = async (id: Project["id"]) => {
     try {
@@ -20,11 +20,11 @@ export default function ProjectsPage() {
   };
 
   createEffect(() => {
-    if (ctx().shouldFetch) {
+    if (getState().shouldFetch) {
       refetch();
       actions.setShouldFetch(false);
     }
-  }, [ctx().shouldFetch]);
+  }, [getState().shouldFetch]);
 
   return (
     <>

@@ -1,45 +1,20 @@
-import { createSignal, createContext, useContext, JSXElement } from "solid-js";
+import { createContext, useContext, ParentProps } from "solid-js";
+import { useProjectsStore, ProjectsStoreType } from "../../store/projectStore"; // adjust to your folder structure
 
-export type ProjectsState = {
-  shouldFetch: boolean;
-};
-
-export const initialProjectsState: ProjectsState = {
-  shouldFetch: false,
-};
-
-export type ProjectsStateContextType = [
-  () => ProjectsState,
-  {
-    setShouldFetch: (arg: ProjectsState["shouldFetch"]) => void;
-  }
-];
-
-const ProjectsContext = createContext<ProjectsStateContextType>([
-  () => initialProjectsState,
-  {
+const ProjectsContext = createContext<ProjectsStoreType>({
+  getState: () => ({
+    shouldFetch: false,
+  }),
+  actions: {
     setShouldFetch: () => undefined,
   },
-]);
+});
 
-type Props = {
-  children: JSXElement;
-};
-
-export default function ProjectsProvider(props: Props) {
-  const [projectsStore, setProjects] = createSignal(initialProjectsState);
+export default function ProjectsProvider(props: ParentProps) {
+  const projectsStore = useProjectsStore();
 
   return (
-    <ProjectsContext.Provider
-      value={[
-        projectsStore as () => ProjectsState,
-        {
-          setShouldFetch(shouldFetch) {
-            setProjects((prev) => ({ ...prev, shouldFetch }));
-          },
-        },
-      ]}
-    >
+    <ProjectsContext.Provider value={projectsStore}>
       {props.children}
     </ProjectsContext.Provider>
   );

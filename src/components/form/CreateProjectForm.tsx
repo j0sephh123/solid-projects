@@ -8,9 +8,9 @@ import { useNotifications } from "../providers/NotificationsProvider";
 export default function CreateProjectForm() {
   const [name, setName] = createSignal<string>("");
   const [status, setStatus] = createSignal<ProjectStatus>("todo");
-  const [, actions] = useModal();
-  const [, projectActions] = useProjects();
-  const [, notificationsActions] = useNotifications();
+  const { actions } = useModal();
+  const { actions: projectActions } = useProjects();
+  const { actions: notificationsActions } = useNotifications();
 
   const handleCreate = async () => {
     try {
@@ -20,7 +20,7 @@ export default function CreateProjectForm() {
     } finally {
       actions.close();
       projectActions.setShouldFetch(true);
-      notificationsActions.setMessage(name())
+      notificationsActions.setMessage(name());
     }
   };
 

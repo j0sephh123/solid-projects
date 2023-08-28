@@ -5,15 +5,15 @@ import renderToast from "./renderToast";
 import { useNotifications } from "../providers/NotificationsProvider";
 
 export default function Notification() {
-  const [notifications, notificationsActions] = useNotifications();
+  const {actions, getState} = useNotifications();
 
   createEffect(() => {
-    const message = notifications().message;
+    const message = getState().message;
 
     if (message) {
       renderToast(message);
 
-      notificationsActions.setMessage(undefined);
+      actions.setMessage(undefined);
     }
   });
 

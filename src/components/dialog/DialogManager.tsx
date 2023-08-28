@@ -4,17 +4,17 @@ import CloseIcon from "../../icons/CloseIcon";
 import CreateProjectForm from "../form/CreateProjectForm";
 
 export default function DialogManager() {
-  const [ctx, actions] = useModal();
+  const { actions, getState } = useModal();
 
   return (
-    <Dialog.Root open={ctx().type !== null}>
+    <Dialog.Root open={getState().type !== null}>
       <Dialog.Portal>
         <Dialog.Overlay class="dialog__overlay" onClick={actions.close} />
         <div class="dialog__positioner">
           <Dialog.Content class="dialog__content">
             <div class="dialog__header">
               <Dialog.Title class="dialog__title">
-                {ctx().type === "create" && "Create Project"}
+                {getState().type === "create" && "Create Project"}
               </Dialog.Title>
               <Dialog.CloseButton
                 onClick={actions.close}
@@ -24,7 +24,7 @@ export default function DialogManager() {
               </Dialog.CloseButton>
             </div>
             <Dialog.Description class="dialog__description">
-              {ctx().type === "create" && <CreateProjectForm />}
+              {getState().type === "create" && <CreateProjectForm />}
             </Dialog.Description>
           </Dialog.Content>
         </div>
