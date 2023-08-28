@@ -1,18 +1,20 @@
 import { Toast, toaster } from "@kobalte/core";
-import CloseIcon from "../../icons/CloseIcon";
 import { Portal } from "solid-js/web";
+import CloseIcon from "../../icons/CloseIcon";
 
 export default function Notification() {
+
+
   const showToast = () => {
     toaster.show((props) => (
-      <Toast.Root toastId={props.toastId} class="toast">
+      <Toast.Root duration={2000} toastId={props.toastId} class="toast">
         <div class="toast__content">
           <div>
             <Toast.Title class="toast__title">
               Event has been created
             </Toast.Title>
             <Toast.Description class="toast__description">
-              Monday, January 3rd at 6:00pm
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
             </Toast.Description>
           </div>
           <Toast.CloseButton class="toast__close-button">
