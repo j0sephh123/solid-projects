@@ -18,6 +18,7 @@ export default function CreateProjectForm() {
     } finally {
       actions.close();
       projectActions.setShouldFetch(true);
+      projectActions.setCreatedProject(name())
     }
   };
 
