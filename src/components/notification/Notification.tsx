@@ -1,21 +1,19 @@
 import { Toast } from "@kobalte/core";
 import { Portal } from "solid-js/web";
-import { useProjects } from "../providers/ProjectsProvider";
 import { createEffect } from "solid-js";
 import renderToast from "./renderToast";
+import { useNotifications } from "../providers/NotificationsProvider";
 
 export default function Notification() {
-  const [projects, projectActions] = useProjects();
+  const [notifications, notificationsActions] = useNotifications();
 
   createEffect(() => {
-    const createdProject = projects().createdProject;
+    const message = notifications().message;
 
-    if (createdProject?.name) {
-      const projectName = createdProject.name as string;
+    if (message) {
+      renderToast(message);
 
-      renderToast(projectName);
-
-      projectActions.setCreatedProject(undefined);
+      notificationsActions.setMessage(undefined);
     }
   });
 

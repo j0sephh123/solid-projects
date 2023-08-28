@@ -1,4 +1,3 @@
-// toast.tsx
 import { Toast, toaster } from "@kobalte/core";
 import CloseIcon from "../../icons/CloseIcon";
 

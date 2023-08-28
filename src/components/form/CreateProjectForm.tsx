@@ -3,12 +3,14 @@ import { useModal } from "../providers/ModalProvider";
 import { ProjectStatus } from "../../types/projectTypes";
 import { createProject } from "../../api";
 import { useProjects } from "../providers/ProjectsProvider";
+import { useNotifications } from "../providers/NotificationsProvider";
 
 export default function CreateProjectForm() {
   const [name, setName] = createSignal<string>("");
   const [status, setStatus] = createSignal<ProjectStatus>("todo");
   const [, actions] = useModal();
   const [, projectActions] = useProjects();
+  const [, notificationsActions] = useNotifications();
 
   const handleCreate = async () => {
     try {
@@ -18,7 +20,7 @@ export default function CreateProjectForm() {
     } finally {
       actions.close();
       projectActions.setShouldFetch(true);
-      projectActions.setCreatedProject(name())
+      notificationsActions.setMessage(name())
     }
   };
 
