@@ -1,5 +1,8 @@
-.input-group label,
-.select-group label {
+.field {
+  margin-bottom: 16px;
+}
+
+.field label {
   display: inline-block;
   margin-bottom: 8px;
   color: #ffffff;
@@ -10,10 +13,6 @@
   width: 100%;
 }
 
-.input-group,
-.select-group {
-  margin-bottom: 16px;
-}
 .input {
   background-color: #333333;
   border: 1px solid #444444;

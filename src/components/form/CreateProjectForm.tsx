@@ -6,6 +6,9 @@ import { useProjects } from "../providers/ProjectsProvider";
 import { useNotifications } from "../providers/NotificationsProvider";
 import styles from "./CreateProjectForm.module.css";
 import Button from "../ui/Button";
+import SingleSelect from "./SingleSelect";
+import FieldWrapper from "./FieldWrapper";
+import Input from "./Input";
 
 export default function CreateProjectForm() {
   const [name, setName] = createSignal<string>("");
@@ -27,37 +30,13 @@ export default function CreateProjectForm() {
 
   return (
     <>
-      <div class={styles["input-group"]}>
-        <label for="myInput">Task Name</label>
-        <input
-          type="text"
-          id="myInput"
-          class={styles.input}
-          placeholder="Enter task name"
-          value={name()}
-          onInput={(e) => setName(e.currentTarget.value)}
-        />
-      </div>
+      <FieldWrapper label="Task Name">
+        <Input setValue={setName} value={name()} />
+      </FieldWrapper>
 
-      <div class={styles["select-group"]}>
-        <label for="taskStatus">Task Status</label>
-        <select
-          value={status()}
-          onInput={(e) => setStatus(e.target.value as ProjectStatus)}
-          id="taskStatus"
-          class={styles.select}
-        >
-          <option class={styles.option} value="todo">
-            To Do
-          </option>
-          <option class={styles.option} value="in_progress">
-            In Progress
-          </option>
-          <option class={styles.option} value="done">
-            Done
-          </option>
-        </select>
-      </div>
+      <FieldWrapper label="Task Status">
+        <SingleSelect value={status()} setValue={setStatus} />
+      </FieldWrapper>
 
       <div class={styles["modal-actions"]}>
         <Button onClick={handleCreate}>Create</Button>
