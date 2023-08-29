@@ -1,0 +1,46 @@
+.input-group label,
+.select-group label {
+  display: inline-block;
+  margin-bottom: 8px;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.modal-actions .button {
+  width: 100%;
+}
+
+.input-group,
+.select-group {
+  margin-bottom: 16px;
+}
+.input {
+  background-color: #333333;
+  border: 1px solid #444444;
+  border-radius: 4px;
+  color: #ffffff;
+  font-size: 16px;
+  padding: 8px 12px;
+  margin: 8px 0;
+}
+.input:focus {
+  outline: none;
+  border-color: #007bff;
+}
+.select {
+  background-color: #333333;
+  border: 1px solid #444444;
+  border-radius: 4px;
+  color: #ffffff;
+  font-size: 16px;
+  padding: 8px 12px;
+  margin: 8px 0;
+}
+.select:focus {
+  outline: none;
+  border-color: #007bff;
+}
+.option {
+  background-color: #333333;
+  color: #ffffff;
+}

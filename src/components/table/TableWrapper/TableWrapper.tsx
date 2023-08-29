@@ -1,4 +1,5 @@
 import { JSXElement } from "solid-js";
+import styles from "../Table.module.css";
 
 type Props = {
   children: JSXElement;
@@ -7,11 +8,11 @@ type Props = {
 
 export default function TableWrapper(props: Props) {
   return (
-    <table>
+    <table class={styles.table}>
       <thead>
-        <tr>
+        <tr class={styles.tr}>
           {props.columns.map((column) => (
-            <th>{column}</th>
+            <th class={styles.th}>{column}</th>
           ))}
         </tr>
       </thead>

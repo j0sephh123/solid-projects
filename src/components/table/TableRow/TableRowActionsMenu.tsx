@@ -1,5 +1,6 @@
 import { DropdownMenu } from "@kobalte/core";
 import TrashIcon from "../../../icons/TrashIcon";
+import styles from "./TableRowActionsMenu.module.css";
 
 type Props = {
   onRequestDelete: () => void;
@@ -8,17 +9,17 @@ type Props = {
 export default function TableRowActionsMenu(props: Props) {
   return (
     <DropdownMenu.Root>
-      <DropdownMenu.Trigger class="dropdown-menu__trigger">
+      <DropdownMenu.Trigger class={styles["dropdown-menu__trigger"]}>
         <span>Actions</span>
       </DropdownMenu.Trigger>
       <DropdownMenu.Portal>
-        <DropdownMenu.Content class="dropdown-menu__content">
+        <DropdownMenu.Content class={styles["dropdown-menu__content"]}>
           <DropdownMenu.Item
             onClick={props.onRequestDelete}
-            class="dropdown-menu__item"
+            class={styles["dropdown-menu__item"]}
           >
             Remove
-            <div class="dropdown-menu__item-right-slot">
+            <div class={styles["dropdown-menu__item-right-slot"]}>
               <TrashIcon />
             </div>
           </DropdownMenu.Item>

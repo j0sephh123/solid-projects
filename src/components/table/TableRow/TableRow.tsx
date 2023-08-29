@@ -1,4 +1,5 @@
 import { JSXElement } from "solid-js";
+import styles from "../Table.module.css";
 
 type RowElement = { value: JSXElement };
 
@@ -8,9 +9,9 @@ type RowProps = {
 
 export default function TableRow(props: RowProps) {
   return (
-    <tr>
+    <tr class={styles.tr}>
       {props.rowElements.map((cell) => (
-        <td>{cell.value}</td>
+        <td class={styles.td}>{cell.value}</td>
       ))}
     </tr>
   );

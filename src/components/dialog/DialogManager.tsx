@@ -5,6 +5,7 @@ import DialogWrapper from "./DialogWrapper";
 import { createMemo } from "solid-js";
 import { useNotifications } from "../providers/NotificationsProvider";
 
+// TODO close delete dialog on overlay click
 export default function DialogManager() {
   const { modalActions, getState } = useModal();
   const { notificationActions } = useNotifications();

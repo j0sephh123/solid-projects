@@ -3,6 +3,7 @@ import { Portal } from "solid-js/web";
 import { createEffect } from "solid-js";
 import renderToast from "./renderToast";
 import { useNotifications } from "../providers/NotificationsProvider";
+import styles from './Notification.module.css';
 
 export default function Notification() {
   const { notificationActions, getState } = useNotifications();
@@ -21,7 +22,7 @@ export default function Notification() {
     <>
       <Portal>
         <Toast.Region>
-          <Toast.List class="toast__list" />
+          <Toast.List class={styles.toast__list} />
         </Toast.Region>
       </Portal>
     </>

@@ -1,6 +1,7 @@
 import { Dialog } from "@kobalte/core";
-import { JSXElement, ParentProps } from "solid-js";
+import { ParentProps } from "solid-js";
 import CloseIcon from "../../icons/CloseIcon";
+import styles from "./Dialog.module.css";
 
 type Props = {
   isOpen: boolean;
@@ -12,19 +13,24 @@ export default function DialogWrapper(props: Props) {
   return (
     <Dialog.Root open={props.isOpen}>
       <Dialog.Portal>
-        <Dialog.Overlay class="dialog__overlay" onClick={props.onClose} />
-        <div class="dialog__positioner">
-          <Dialog.Content class="dialog__content">
-            <div class="dialog__header">
-              <Dialog.Title class="dialog__title">{props.title}</Dialog.Title>
+        <Dialog.Overlay
+          class={styles.dialog__overlay}
+          onClick={props.onClose}
+        />
+        <div class={styles.dialog__positioner}>
+          <Dialog.Content class={styles.dialog__content}>
+            <div class={styles.dialog__header}>
+              <Dialog.Title class={styles.dialog__title}>
+                {props.title}
+              </Dialog.Title>
               <Dialog.CloseButton
                 onClick={props.onClose}
-                class="dialog__closeButton"
+                class={styles.dialog__closeButton}
               >
                 <CloseIcon />
               </Dialog.CloseButton>
             </div>
-            <Dialog.Description class="dialog__description">
+            <Dialog.Description class={styles.dialog__description}>
               {props.children}
             </Dialog.Description>
           </Dialog.Content>

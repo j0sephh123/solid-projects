@@ -1,3 +1,5 @@
+import Button from "../ui/Button";
+
 type Props = {
   onConfirm: VoidFunction;
   onCancel: VoidFunction;
@@ -6,12 +8,8 @@ type Props = {
 export default function ConfirmDeleteControls(props: Props) {
   return (
     <>
-      <button onClick={props.onConfirm} class="button">
-        Delete
-      </button>
-      <button onClick={props.onCancel} class="button">
-        Cancel
-      </button>
+      <Button onClick={props.onConfirm}>Delete</Button>
+      <Button onClick={props.onCancel}>Cancel</Button>
     </>
   );
 }
