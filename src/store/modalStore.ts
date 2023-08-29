@@ -2,6 +2,7 @@ import { createSignal } from "solid-js";
 
 export type ModalState = {
   type: "create" | "delete" | null;
+  callback?: VoidFunction;
 };
 
 export const initialModalState: ModalState = {
@@ -10,17 +11,21 @@ export const initialModalState: ModalState = {
 
 export type ModalStoreType = {
   getState: () => ModalState;
-  actions: {
-    open: (type: ModalState["type"]) => void;
+  modalActions: {
+    open: (type: ModalState["type"], callback?: VoidFunction) => void;
     close: VoidFunction;
   };
 };
 
 export function useModalStore(): ModalStoreType {
-  const [modalState, setModalState] = createSignal(initialModalState);
+  const [getState, setModalState] = createSignal(initialModalState);
 
-  const open = (type: ModalState["type"]) => {
-    setModalState((prev) => ({ ...prev, type }));
+  const open = (type: ModalState["type"], callback?: VoidFunction) => {
+    setModalState((prev) => ({
+      ...prev,
+      type,
+      ...(callback ? { callback } : {}),
+    }));
   };
 
   const close = () => {
@@ -28,8 +33,8 @@ export function useModalStore(): ModalStoreType {
   };
 
   return {
-    getState: modalState,
-    actions: {
+    getState,
+    modalActions: {
       open,
       close,
     },

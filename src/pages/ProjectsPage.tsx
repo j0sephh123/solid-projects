@@ -5,9 +5,11 @@ import TableWrapper from "../components/table/TableWrapper/TableWrapper";
 import { Project } from "../types/projectTypes";
 import { useProjects } from "../components/providers/ProjectsProvider";
 import TableRowActionsMenu from "../components/table/TableRow/TableRowActionsMenu";
+import { useModal } from "../components/providers/ModalProvider";
 
 export default function ProjectsPage() {
-  const { actions, getState } = useProjects();
+  const { modalActions } = useModal();
+  const { projectActions, getState } = useProjects();
   const [query, { refetch }] = createResource<Project[]>(getProjects);
   const handleDelete = async (id: Project["id"]) => {
     try {
@@ -15,19 +17,24 @@ export default function ProjectsPage() {
     } catch (e) {
       console.log(e);
     } finally {
-      actions.setShouldFetch(true);
+      projectActions.setShouldFetch(true);
     }
+  };
+
+  const requestDelete = async (id: Project["id"]) => {
+    modalActions.open("delete", () => handleDelete(id));
   };
 
   createEffect(() => {
     if (getState().shouldFetch) {
       refetch();
-      actions.setShouldFetch(false);
+      projectActions.setShouldFetch(false);
     }
-  }, [getState().shouldFetch]);
+  });
 
   return (
     <>
+      <h3>Shown Projects: {query()?.length}</h3>
       <Switch>
         <Match when={query.loading}>
           <p>Loading...</p>
@@ -53,7 +60,7 @@ export default function ProjectsPage() {
                     {
                       value: (
                         <TableRowActionsMenu
-                          onRequestDelete={() => handleDelete(id)}
+                          onRequestDelete={() => requestDelete(id)}
                         />
                       ),
                     },

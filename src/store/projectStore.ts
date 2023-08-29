@@ -10,21 +10,21 @@ export const initialProjectsState: ProjectsState = {
 
 export type ProjectsStoreType = {
   getState: () => ProjectsState;
-  actions: {
+  projectActions: {
     setShouldFetch: (arg: ProjectsState["shouldFetch"]) => void;
   };
 };
 
 export function useProjectsStore(): ProjectsStoreType {
-  const [projectsState, setProjectsState] = createSignal(initialProjectsState);
+  const [getState, setProjectsState] = createSignal(initialProjectsState);
 
   const setShouldFetch = (shouldFetch: ProjectsState["shouldFetch"]) => {
     setProjectsState((prev) => ({ ...prev, shouldFetch }));
   };
 
   return {
-    getState: projectsState,
-    actions: {
+    getState,
+    projectActions: {
       setShouldFetch,
     },
   };

@@ -4,8 +4,9 @@ import { useModalStore, type ModalStoreType } from "../../store/modalStore";
 const ModalContext = createContext<ModalStoreType>({
   getState: () => ({
     type: null,
+    callback: () => undefined,
   }),
-  actions: {
+  modalActions: {
     open: () => undefined,
     close: () => undefined,
   },

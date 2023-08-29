@@ -8,7 +8,7 @@ const NotificationsContext = createContext<NotificationsStoreType>({
   getState: () => ({
     message: undefined,
   }),
-  actions: {
+  notificationActions: {
     setMessage: () => undefined,
   },
 });

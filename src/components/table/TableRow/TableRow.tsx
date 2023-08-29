@@ -1,6 +1,6 @@
 import { JSXElement } from "solid-js";
 
-export type RowElement = { value: JSXElement };
+type RowElement = { value: JSXElement };
 
 type RowProps = {
   rowElements: RowElement[];
@@ -9,7 +9,7 @@ type RowProps = {
 export default function TableRow(props: RowProps) {
   return (
     <tr>
-      {props.rowElements.map((cell, index) => (
+      {props.rowElements.map((cell) => (
         <td>{cell.value}</td>
       ))}
     </tr>

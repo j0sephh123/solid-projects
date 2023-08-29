@@ -10,13 +10,13 @@ export const initialNotificationsState: NotificationsState = {
 
 export type NotificationsStoreType = {
   getState: () => NotificationsState;
-  actions: {
+  notificationActions: {
     setMessage: (arg: NotificationsState["message"]) => void;
   };
 };
 
 export function useNotificationsStore(): NotificationsStoreType {
-  const [notificationsState, setNotificationsState] = createSignal(
+  const [getState, setNotificationsState] = createSignal(
     initialNotificationsState
   );
 
@@ -25,8 +25,8 @@ export function useNotificationsStore(): NotificationsStoreType {
   };
 
   return {
-    getState: notificationsState,
-    actions: {
+    getState,
+    notificationActions: {
       setMessage,
     },
   };

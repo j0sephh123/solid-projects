@@ -1,13 +1,13 @@
 import { useModal } from "./providers/ModalProvider";
 
 export default function TheNavbar() {
-  const { actions } = useModal();
+  const { modalActions } = useModal();
 
   return (
     <nav>
       <div>Home</div>
       <div>
-        <button onClick={() => actions.open("create")} class="button">
+        <button onClick={() => modalActions.open("create")} class="button">
           Create Project
         </button>
       </div>

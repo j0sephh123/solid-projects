@@ -5,7 +5,7 @@ import renderToast from "./renderToast";
 import { useNotifications } from "../providers/NotificationsProvider";
 
 export default function Notification() {
-  const {actions, getState} = useNotifications();
+  const { notificationActions, getState } = useNotifications();
 
   createEffect(() => {
     const message = getState().message;
@@ -13,7 +13,7 @@ export default function Notification() {
     if (message) {
       renderToast(message);
 
-      actions.setMessage(undefined);
+      notificationActions.setMessage(undefined);
     }
   });
 

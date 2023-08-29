@@ -5,7 +5,7 @@ const ProjectsContext = createContext<ProjectsStoreType>({
   getState: () => ({
     shouldFetch: false,
   }),
-  actions: {
+  projectActions: {
     setShouldFetch: () => undefined,
   },
 });
