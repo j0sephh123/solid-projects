@@ -1,6 +1,7 @@
 import { Toast, toaster } from "@kobalte/core";
 import CloseIcon from "../../icons/CloseIcon";
 
+// TODO create a function for title
 export default function renderToast(name: string) {
   return toaster.show((props) => (
     <Toast.Root duration={2000} toastId={props.toastId} class="toast">
