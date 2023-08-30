@@ -6,7 +6,7 @@ import { useProjects } from "../providers/ProjectsProvider";
 import { useNotifications } from "../providers/NotificationsProvider";
 import styles from "./CreateProjectForm.module.css";
 import Button from "../ui/Button";
-import SingleSelect from "./SingleSelect";
+import SingleSelect from "./SingleSelect/SingleSelect";
 import FieldWrapper from "./FieldWrapper";
 import Input from "./Input";
 
@@ -31,13 +31,11 @@ export default function CreateProjectForm() {
   return (
     <>
       <FieldWrapper label="Task Name">
-        <Input setValue={setName} value={name()} />
+        <Input value={name()} setValue={setName} />
       </FieldWrapper>
-
       <FieldWrapper label="Task Status">
         <SingleSelect value={status()} setValue={setStatus} />
       </FieldWrapper>
-
       <div class={styles["modal-actions"]}>
         <Button onClick={handleCreate}>Create</Button>
       </div>
