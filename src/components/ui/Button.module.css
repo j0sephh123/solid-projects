@@ -19,3 +19,10 @@
 .button:hover {
   background-color: hsl(200, 36%, 25%);
 }
+.button.disabled {
+  opacity: 0.5;
+  cursor: initial;
+}
+.button.disabled:hover {
+  background-color: hsl(200 98% 39%);
+}

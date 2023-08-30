@@ -37,7 +37,12 @@ export default function CreateProjectForm() {
         <SingleSelect value={status()} setValue={setStatus} />
       </FieldWrapper>
       <div class={styles["modal-actions"]}>
-        <Button onClick={handleCreate}>Create</Button>
+        <Button
+          isDisabled={name().length < 2 || name().length > 50}
+          onClick={handleCreate}
+        >
+          Create
+        </Button>
       </div>
     </>
   );
