@@ -1,3 +1,23 @@
+@keyframes contentHide {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+}
+@keyframes contentShow {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
 .dropdown-menu__trigger {
   appearance: none;
   display: inline-flex;
@@ -24,17 +44,6 @@
 }
 .dropdown-menu__trigger:active {
   background-color: hsl(201 90% 27%);
-}
-
-@keyframes contentShow {
-  from {
-    opacity: 0;
-    transform: scale(0.96);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
 }
 
 .dropdown-menu__content {
