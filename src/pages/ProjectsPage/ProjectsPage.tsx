@@ -13,7 +13,7 @@ import { updateProject } from "../../api";
 export default function ProjectsPage() {
   const { query, deleteProject, refetch } = useProjectsAPI();
   const { modalActions } = useModal();
-  const { projectActions, getState } = useProjects();
+  const { projectActions, state } = useProjects();
 
   const handleSaveName = async (id: number, value: string) => {
     const result = await updateProject(id, value);
@@ -22,7 +22,7 @@ export default function ProjectsPage() {
   };
 
   createEffect(() => {
-    if (getState().shouldFetch) {
+    if (state.shouldFetch) {
       refetch();
       projectActions.setShouldFetch(false);
     }

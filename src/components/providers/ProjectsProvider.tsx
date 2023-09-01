@@ -2,9 +2,9 @@ import { createContext, useContext, ParentProps } from "solid-js";
 import { useProjectsStore, ProjectsStoreType } from "../../store/projectStore"; // adjust to your folder structure
 
 const ProjectsContext = createContext<ProjectsStoreType>({
-  getState: () => ({
+  state: {
     shouldFetch: false,
-  }),
+  },
   projectActions: {
     setShouldFetch: () => undefined,
   },

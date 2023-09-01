@@ -1,29 +1,35 @@
-import { createSignal } from "solid-js";
+import { createStore } from "solid-js/store";
 
 export type ProjectsState = {
   shouldFetch: boolean;
+  // projects: Project[];
 };
 
 export const initialProjectsState: ProjectsState = {
   shouldFetch: false,
+  // projects: [],
 };
 
 export type ProjectsStoreType = {
-  getState: () => ProjectsState;
+  state: ProjectsState;
   projectActions: {
     setShouldFetch: (arg: ProjectsState["shouldFetch"]) => void;
   };
 };
 
 export function useProjectsStore(): ProjectsStoreType {
-  const [getState, setProjectsState] = createSignal(initialProjectsState);
+  const [state, setState] = createStore(initialProjectsState);
 
   const setShouldFetch = (shouldFetch: ProjectsState["shouldFetch"]) => {
-    setProjectsState((prev) => ({ ...prev, shouldFetch }));
+    setState((prev) => ({ ...prev, shouldFetch }));
   };
 
+  // const setProjects = (newProjects) => {
+  //   setProjectsState('projects', newProjects);
+  // };
+
   return {
-    getState,
+    state,
     projectActions: {
       setShouldFetch,
     },
