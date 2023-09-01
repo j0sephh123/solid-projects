@@ -43,3 +43,23 @@
   background-color: #333333;
   color: #ffffff;
 }
+
+.strongFadeEffect {
+  animation: strongFadeOutIn 0.5s ease-in-out;
+}
+
+.glowEffect {
+  animation: textGlow 0.5s ease-in-out;
+}
+
+@keyframes textGlow {
+  0%,
+  100% {
+    text-shadow: none;
+    opacity: 1;
+  }
+  50% {
+    text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 30px #ff00ff;
+    opacity: 0.3;
+  }
+}

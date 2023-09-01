@@ -23,3 +23,16 @@ export const createProject = (newProject: {
 
 export const removeProject = (id: Project["id"]) =>
   fetch(`${url}/${id}`, { method: "DELETE" });
+
+export const updateProject = (id: Project["id"], name: string) =>
+  fetch(`${url}/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      data: {
+        name,
+      },
+    }),
+  }).then((response) => response.json());

@@ -7,11 +7,19 @@ import { useModal } from "../../components/providers/ModalProvider";
 import { useProjectsAPI } from "./useProjectsApi";
 import FetchStatusIndicator from "./FetchStatusIndicator";
 import Heading from "../../components/ui/Heading";
+import EditableText from "../../components/form/EditableText/EditableText";
+import { updateProject } from "../../api";
 
 export default function ProjectsPage() {
   const { query, deleteProject, refetch } = useProjectsAPI();
   const { modalActions } = useModal();
   const { projectActions, getState } = useProjects();
+
+  const handleSaveName = async (id: number, value: string) => {
+    const result = await updateProject(id, value);
+
+    console.log(result);
+  };
 
   createEffect(() => {
     if (getState().shouldFetch) {
@@ -30,7 +38,10 @@ export default function ProjectsPage() {
               <TableRow
                 rowElements={[
                   id,
-                  name,
+                  <EditableText
+                    value={name}
+                    onSave={(value) => handleSaveName(id, value)}
+                  />,
                   status,
                   <TableRowActionsMenu
                     onRequestDelete={() =>
