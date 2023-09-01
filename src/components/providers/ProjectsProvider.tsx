@@ -4,9 +4,11 @@ import { useProjectsStore, ProjectsStoreType } from "../../store/projectStore"; 
 const ProjectsContext = createContext<ProjectsStoreType>({
   state: {
     shouldFetch: false,
+    projects: [],
   },
   projectActions: {
     setShouldFetch: () => undefined,
+    setProjects: () => undefined,
   },
 });
 
