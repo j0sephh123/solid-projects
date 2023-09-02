@@ -1,7 +1,7 @@
 import { createSignal } from "solid-js";
 import { useModal } from "../providers/ModalProvider";
 import { ProjectStatus } from "../../types/projectTypes";
-import { createProject } from "../../api";
+import api from "../../api";
 import { useProjects } from "../providers/ProjectsProvider";
 import { useNotifications } from "../providers/NotificationsProvider";
 import styles from "./CreateProjectForm.module.css";
@@ -18,7 +18,7 @@ export default function CreateProjectForm() {
   const { notificationActions } = useNotifications();
   const handleCreate = async () => {
     try {
-      await createProject({ name: name(), status: status() });
+      await api.createProject({ name: name(), status: status() });
     } catch (e) {
       console.log(e);
     } finally {

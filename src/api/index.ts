@@ -7,62 +7,69 @@ interface FetchOptions extends RequestInit {
   headers?: Record<string, string>;
 }
 
-const fetchWithConfig = (url: string, options: FetchOptions = {}) => {
+const fetchWithConfig = async (
+  url: string,
+  options: FetchOptions = {}
+): Promise<any> => {
   const defaultHeaders = {
     "Content-Type": "application/json",
   };
 
-  return fetch(`${baseURL}/${url}`, {
+  const response = await fetch(`${baseURL}${url}`, {
     ...options,
     headers: {
       ...defaultHeaders,
       ...options.headers,
     },
   });
+
+  return handleResponse(response);
 };
 
-const handleResponse = (response: Response) => {
+const handleResponse = async (response: Response): Promise<any> => {
   if (!response.ok) {
     return Promise.reject(response.statusText);
   }
   return response.json();
 };
 
-export const getProjects = (): ApiResponse<ProjectsResponse> =>
-  fetchWithConfig("")
-    .then(handleResponse)
-    .then((r) => r);
+const getProjects = async (): ApiResponse<ProjectsResponse> =>
+  fetchWithConfig("");
 
-export const createProject = (newProject: {
+const createProject = async (newProject: {
   name: string;
   status: ProjectStatus;
-}): ApiResponse<ProjectsResponse> => {
-  return fetchWithConfig("", {
+}): ApiResponse<ProjectsResponse> =>
+  fetchWithConfig("", {
     method: "POST",
     body: JSON.stringify({
       data: { name: newProject.name, status: newProject.status },
     }),
-  }).then(handleResponse);
-};
+  });
 
-export const removeProject = (
+const removeProject = async (
   id: Project["id"]
-): ApiResponse<ProjectsResponse> => {
-  return fetchWithConfig(`/${id}`, {
-    headers: { method: "DELETE" },
-  }).then(handleResponse);
-};
+): ApiResponse<ProjectsResponse> =>
+  fetchWithConfig(`/${id}`, {
+    method: "DELETE",
+  });
 
-export const updateProject = (
+const updateProject = async (
   id: Project["id"],
   name: string
-): ApiResponse<ProjectsResponse> => {
-  return fetchWithConfig(`/${id}`, {
-    headers: {
-      method: "PUT",
-      body: JSON.stringify({
-        data: { name },
-      }),
-    },
-  }).then(handleResponse);
+): ApiResponse<ProjectsResponse> =>
+  fetchWithConfig(`/${id}`, {
+    method: "PUT",
+    body: JSON.stringify({
+      data: { name },
+    }),
+  });
+
+const api = {
+  getProjects,
+  createProject,
+  removeProject,
+  updateProject,
 };
+
+export default api;

@@ -1,10 +1,10 @@
 import { createEffect, createMemo, createResource } from "solid-js";
-import { getProjects } from "../../../api";
+import api from "../../../api";
 import { useProjects } from "../../../components/providers/ProjectsProvider";
 
 export function useProjectsData() {
   const { projectActions, state } = useProjects();
-  const [query, { refetch }] = createResource(getProjects);
+  const [query, { refetch }] = createResource(api.getProjects);
 
   createEffect(() => {
     const projectsResponse = query();

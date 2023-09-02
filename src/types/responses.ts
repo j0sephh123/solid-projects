@@ -7,12 +7,7 @@ export type PaginationMeta = {
   total: number;
 };
 
-export type ProjectsResponse = {
-  data: Project[];
-  meta: {
-    pagination: PaginationMeta;
-  };
-};
+export type ProjectsResponse = Project[];
 
 export type ApiResponse<T> = Promise<{
   data: T;

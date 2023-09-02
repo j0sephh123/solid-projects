@@ -1,5 +1,5 @@
 import { For } from "solid-js";
-import { updateProject } from "../../api";
+import api from "../../api";
 import EditableText from "../../components/form/EditableText/EditableText";
 import { useModal } from "../../components/providers/ModalProvider";
 import TableRow from "../../components/table/TableRow/TableRow";
@@ -16,7 +16,7 @@ const ProjectsPage = () => {
   const { handleDeleteProject } = useProjectDeletion();
 
   const handleSaveName = async (id: number, value: string) => {
-    await updateProject(id, value);
+    await api.updateProject(id, value);
   };
 
   return (
