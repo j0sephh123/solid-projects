@@ -17,7 +17,7 @@ export default defineConfig({
   test: {
     environment: "jsdom",
     globals: true,
-    setupFiles: ["<rootDir>/tests/setup.js"],
+    setupFiles: ["./tests/setup.js"],
     // otherwise, solid would be loaded twice:
     // if you have few tests, try commenting one
     // or both out to improve performance:
