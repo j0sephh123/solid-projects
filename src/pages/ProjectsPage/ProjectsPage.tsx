@@ -11,10 +11,10 @@ import { updateProject } from "../../api";
 
 const ProjectsPage = () => {
   const {
-    query,
+    length,
     deleteProject,
     fetchProjectActions,
-    state,
+    projects,
     isError,
     isLoading,
   } = useProjectsAPI();
@@ -22,16 +22,14 @@ const ProjectsPage = () => {
 
   const handleSaveName = async (id: number, value: string) => {
     const result = await updateProject(id, value);
-
-    console.log(result);
   };
 
   return (
     <>
-      <Heading>Shown Projects: {query()?.data.length}</Heading>
+      <Heading>Shown Projects: {length()}</Heading>
       <FetchStatusIndicator isError={isError()} isLoading={isLoading()}>
         <TableWrapper columns={["id", "name", "status", "actions"]}>
-          <For each={state.projects}>
+          <For each={projects()}>
             {({ id, attributes: { name, status } }) => (
               <TableRow
                 rowElements={[

@@ -33,12 +33,14 @@ export function useProjectsAPI() {
 
   const isError = createMemo(() => props.error);
   const isLoading = createMemo(() => props.loading);
+  const length = createMemo(() => props.latest?.data.length);
+  const projects = createMemo(() => state.projects);
 
   return {
     isError,
     isLoading,
-    state,
-    query,
+    projects,
+    length,
     deleteProject,
     refetch,
     fetchProjectActions: () => projectActions.setShouldFetch(true),
