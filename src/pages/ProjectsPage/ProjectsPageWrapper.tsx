@@ -1,6 +1,6 @@
 import { ParentProps } from "solid-js";
 import TableWrapper from "../../components/table/TableWrapper/TableWrapper";
-import Heading from "../../components/ui/Heading";
+import Heading from "../../components/ui/Heading/Heading";
 import FetchStatusIndicator from "./FetchStatusIndicator";
 import { useProjectsFetch } from "./hooks/useProjectsFetch";
 
