@@ -1,5 +1,3 @@
-// ProjectsPageWrapper.js
-
 import { ParentProps } from "solid-js";
 import TableWrapper from "../../components/table/TableWrapper/TableWrapper";
 import Heading from "../../components/ui/Heading";

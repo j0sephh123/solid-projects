@@ -13,3 +13,8 @@ export type ProjectsResponse = {
     pagination: PaginationMeta;
   };
 };
+
+export type ApiResponse<T> = Promise<{
+  data: T;
+  meta: Record<string, PaginationMeta | {}>;
+}>;
