@@ -1,4 +1,4 @@
-import { createEffect, createResource } from "solid-js";
+import { createEffect, createMemo, createResource, splitProps } from "solid-js";
 import { Project } from "../../types/projectTypes";
 import { getProjects, removeProject } from "../../api";
 import { useProjects } from "../../components/providers/ProjectsProvider";
@@ -10,17 +10,18 @@ export function useProjectsAPI() {
   const deleteProject = async (id: Project["id"], callback: VoidFunction) => {
     try {
       await removeProject(id);
-      refetch(); // Refetching projects after successful deletion
+      refetch();
     } catch (e) {
       console.error("An error occurred while deleting the project: ", e);
-      // Handle error accordingly
     } finally {
       callback();
     }
   };
 
+  const [props] = splitProps(query, ["loading", "error", "latest"]);
+
   createEffect(() => {
-    projectActions.setProjects(query());
+    projectActions.setProjects(query()?.data as Project[]);
   });
 
   createEffect(() => {
@@ -30,7 +31,12 @@ export function useProjectsAPI() {
     }
   });
 
+  const isError = createMemo(() => props.error);
+  const isLoading = createMemo(() => props.loading);
+
   return {
+    isError,
+    isLoading,
     state,
     query,
     deleteProject,

@@ -1,4 +1,4 @@
-import { createEffect, createSignal } from "solid-js";
+import { createSignal } from "solid-js";
 import Input from "../Input";
 import styles from "../CreateProjectForm.module.css";
 
@@ -40,10 +40,6 @@ export default function EditableText(props: Props) {
       console.log("else");
     }
   };
-
-  createEffect(() => {
-    console.log(effectTrigger());
-  });
 
   return (
     <div class={effectTrigger() ? styles.glowEffect : ""}>

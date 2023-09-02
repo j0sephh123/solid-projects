@@ -1,11 +1,12 @@
 import { Project, ProjectStatus } from "../types/projectTypes";
+import { ProjectsResponse } from "../types/responses";
 
 const url = "http://localhost:1337/api/projects";
 
-export const getProjects = () =>
+export const getProjects = (): Promise<ProjectsResponse> =>
   fetch(url)
     .then((r) => r.json())
-    .then((r) => r.data);
+    .then((r) => r);
 
 export const createProject = (newProject: {
   name: string;

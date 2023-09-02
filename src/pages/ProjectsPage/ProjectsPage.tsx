@@ -9,9 +9,15 @@ import Heading from "../../components/ui/Heading";
 import EditableText from "../../components/form/EditableText/EditableText";
 import { updateProject } from "../../api";
 
-export default function ProjectsPage() {
-  const { query, deleteProject, fetchProjectActions, state } =
-    useProjectsAPI();
+const ProjectsPage = () => {
+  const {
+    query,
+    deleteProject,
+    fetchProjectActions,
+    state,
+    isError,
+    isLoading,
+  } = useProjectsAPI();
   const { modalActions } = useModal();
 
   const handleSaveName = async (id: number, value: string) => {
@@ -22,8 +28,8 @@ export default function ProjectsPage() {
 
   return (
     <>
-      <Heading>Shown Projects: {query()?.length}</Heading>
-      <FetchStatusIndicator isError={query.error} isLoading={query.loading}>
+      <Heading>Shown Projects: {query()?.data.length}</Heading>
+      <FetchStatusIndicator isError={isError()} isLoading={isLoading()}>
         <TableWrapper columns={["id", "name", "status", "actions"]}>
           <For each={state.projects}>
             {({ id, attributes: { name, status } }) => (
@@ -50,4 +56,6 @@ export default function ProjectsPage() {
       </FetchStatusIndicator>
     </>
   );
-}
+};
+
+export default ProjectsPage;
